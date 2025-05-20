@@ -1,6 +1,7 @@
 package com.example.mymobileapp;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -123,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Employee saved successfully", Toast.LENGTH_SHORT).show();
                     clearForm();
+                    Intent intent = new Intent(MainActivity.this, EmployeeListActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Failed to save employee" + response.message(), Toast.LENGTH_SHORT).show();
                 }
