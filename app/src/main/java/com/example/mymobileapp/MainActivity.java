@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mymobileapp.activity.EmployeeListActivity;
 import com.example.mymobileapp.model.Employee;
 import com.example.mymobileapp.service.ApiService;
 import com.google.android.material.textfield.TextInputEditText;
@@ -22,7 +23,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,9 +69,16 @@ public class MainActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.button);
 
 
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)  // Increase connect timeout
+                .readTimeout(30, TimeUnit.SECONDS)    // Increase read timeout
+                .writeTimeout(30, TimeUnit.SECONDS)   // Increase write timeout
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.182:8081/")
+                .baseUrl("http://192.168.100.4:8081/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
 
         apiService = retrofit.create(ApiService.class);

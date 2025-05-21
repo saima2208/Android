@@ -1,7 +1,7 @@
 package com.example.mymobileapp.model;
 
 public class Employee {
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String designation;
