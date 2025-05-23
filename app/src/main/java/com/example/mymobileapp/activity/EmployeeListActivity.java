@@ -10,11 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymobileapp.R;
+import com.example.mymobileapp.adapter.EmployeeAdapter;
 import com.example.mymobileapp.model.Employee;
 import com.example.mymobileapp.service.ApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,6 +32,12 @@ public class EmployeeListActivity extends AppCompatActivity {
 
     private static final String TAG = "EmployeeListActivity";
 
+    private RecyclerView recyclerView;
+
+    private EmployeeAdapter employeeAdapter;
+
+    private List<Employee> employeeList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +49,17 @@ public class EmployeeListActivity extends AppCompatActivity {
             return insets;
         });
 
+
+        employeeAdapter = new EmployeeAdapter(employeeList);
+        recyclerView = findViewById(R.id.employeeRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(employeeAdapter);
+
     }
 
     private void fetchEmployee(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2.:8081/")
+                .baseUrl("http://192.168.100.4:8081/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -59,6 +75,9 @@ public class EmployeeListActivity extends AppCompatActivity {
                         Log.d(TAG, "ID : " + emp.getId() + "Name : " + emp.getName() + "Designation : " + emp.getDesignation());
 
                     }
+                    employeeList.clear();
+                    employeeList.addAll(employees);
+                    employeeAdapter.notifyDataSetChanged();
                 }else {
                     Log.e(TAG, "API Response Error" + response.code());
                 }
