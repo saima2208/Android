@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText textName, textEmail, textDesignation, numberAge, multilineAddress, decimalSalary;
 
-    private Button btnSave;
+    private Button btnSave, btnListPage;
 
     private ApiService apiService;
 
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         multilineAddress = findViewById(R.id.address);
         decimalSalary = findViewById(R.id.editTextNumberDecimal);
         btnSave = findViewById(R.id.button);
+        btnListPage = findViewById(R.id.btnListPage);
 
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -86,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
         dateLayout.setEndIconOnClickListener(v -> showDatePicker());
 
         btnSave.setOnClickListener(v -> saveEmployee());
+        btnListPage.setOnClickListener(v -> navigateToEmployeeListPage());
+    }
+
+    private void navigateToEmployeeListPage() {
+        Intent intent = new Intent(MainActivity.this, EmployeeListActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showDatePicker() {
