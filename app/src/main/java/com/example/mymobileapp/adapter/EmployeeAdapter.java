@@ -28,7 +28,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
     public EmployeeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_employee,parent,false);
+                .inflate(R.layout.item_employee, parent, false);
 
         return new EmployeeViewHolder(view);
     }
@@ -47,20 +47,17 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         holder.deleteButton.setOnClickListener(v -> {
             Log.d("Delete", "Delete clicked for " + employee.getName());
         });
-
     }
 
     @Override
     public int getItemCount() {
-//        return 0;
         return employeeList.size();
     }
 
-    public static class EmployeeViewHolder extends RecyclerView.ViewHolder{
-
-        TextView nameText, emailText,designationText;
-
+    public static class EmployeeViewHolder extends RecyclerView.ViewHolder {
+        TextView nameText, emailText, designationText;
         Button updateButton, deleteButton;
+
         public EmployeeViewHolder(@NonNull View itemView) {
             super(itemView);
             nameText = itemView.findViewById(R.id.nameText);

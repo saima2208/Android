@@ -1,7 +1,7 @@
 package com.example.mymobileapp.model;
 
 public class Employee {
-    private Integer id;
+    private int id;
     private String name;
     private String email;
     private String designation;
@@ -9,6 +9,8 @@ public class Employee {
     private String address;
     private String dob;
     private double salary;
+
+    private String image;
 
     public Employee() {
     }
@@ -75,5 +77,13 @@ public class Employee {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -20,6 +20,9 @@
             android:name=".activity.EmployeeListActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.AddEmployeeActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
