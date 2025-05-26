@@ -49,7 +49,7 @@ public class EmployeeListActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        employeeAdapter = new EmployeeAdapter(employeeList);
+        employeeAdapter = new EmployeeAdapter(this,employeeList);
         recyclerView = findViewById(R.id.employeeRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(employeeAdapter);
@@ -65,7 +65,7 @@ public class EmployeeListActivity extends AppCompatActivity {
 
     private void fetchEmployees() {
         Retrofit retrofit = new Retrofit.Builder()
-               .baseUrl("http://192.168.100.2:8081/")
+               .baseUrl("http://192.168.0.8:8081/")
 
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

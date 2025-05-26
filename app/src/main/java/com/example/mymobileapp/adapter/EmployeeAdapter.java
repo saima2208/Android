@@ -1,26 +1,43 @@
 package com.example.mymobileapp.adapter;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymobileapp.R;
+import com.example.mymobileapp.activity.AddEmployeeActivity;
 import com.example.mymobileapp.model.Employee;
+import com.example.mymobileapp.service.ApiService;
+import com.example.mymobileapp.util.ApiClient;
+import com.google.gson.Gson;
 
 import java.util.List;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder> {
+    private  Context context;
     private List<Employee> employeeList;
 
-    public EmployeeAdapter(List<Employee> employeeList) {
+    private ApiService apiService;
+
+    public EmployeeAdapter(Context context, List<Employee> employeeList) {
+        this.context = context;
         this.employeeList = employeeList;
+        this.apiService = ApiClient.getApiService();
     }
 
     @NonNull
@@ -42,10 +59,45 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
 
         holder.updateButton.setOnClickListener(v -> {
             Log.d("Update", "Update clicked for " + employee.getName());
+
+            Intent intent = new Intent(context, AddEmployeeActivity.class);
+            intent.putExtra("employee", new Gson().toJson(employee));
+            context.startActivity(intent);
         });
 
         holder.deleteButton.setOnClickListener(v -> {
             Log.d("Delete", "Delete clicked for " + employee.getName());
+            new AlertDialog.Builder(context)
+            .setTitle("Delete")
+                    .setMessage("Are you sure want to delete" + employee.getName() + "?")
+            .setPositiveButton("Yes",
+                    (DialogInterface dialog, int which) -> apiService.deleteEmployee(employee.getId())
+                            .enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, @NonNull Response<Void> response) {
+                                    if (response.isSuccessful()){
+                                        int adapterPosition = holder.getAdapterPosition();
+                                        if (adapterPosition != RecyclerView.NO_POSITION ){
+                                            employeeList.remove(adapterPosition);
+                                            notifyItemRemoved(adapterPosition);
+                                       notifyItemRangeChanged(adapterPosition, employeeList.size());
+
+
+                                            Toast.makeText(context, "Delete successfully", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Failed to delete", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                                    Toast.makeText(context, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+             }))
+                    .setNegativeButton("Cancel",null)
+                    .show();
         });
     }
 
