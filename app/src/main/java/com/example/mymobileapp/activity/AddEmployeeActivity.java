@@ -32,8 +32,7 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class AddEmployeeActivity extends AppCompatActivity {
 
@@ -72,7 +71,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        if (getIntent().hasExtra("employee")){
+        if (getIntent().hasExtra("employee")) {
             Employee employee = new Gson()
                     .fromJson(intent.getStringExtra("employee"), Employee.class);
             employeeId = employee.getId();
@@ -80,14 +79,16 @@ public class AddEmployeeActivity extends AppCompatActivity {
             textName.setText(employee.getName());
             textEmail.setText(employee.getEmail());
             textDesignation.setText(employee.getDesignation());
-            numberAge.setText(employee.getAge());
+            numberAge.setText(String.valueOf(employee.getAge()));
             multilineAddress.setText(employee.getAddress());
             editTextDob.setText(employee.getDob());
             decimalSalary.setText(String.valueOf(employee.getSalary()));
-
             btnSave.setText(R.string.update);
             isEditMode = true;
         }
+
+
+
 
         btnSave.setOnClickListener(v -> saveOrUpdateEmployee());
 
@@ -189,6 +190,11 @@ public class AddEmployeeActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
 
     private void clearForm() {
         textName.setText("");

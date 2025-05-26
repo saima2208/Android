@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.example.mymobileapp.R;
 import com.example.mymobileapp.adapter.EmployeeAdapter;
 import com.example.mymobileapp.model.Employee;
 import com.example.mymobileapp.service.ApiService;
+import com.example.mymobileapp.util.EmployeeDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,9 +85,11 @@ public class EmployeeListActivity extends AppCompatActivity {
                         Log.d(TAG, "ID: " + emp.getId() + ", Name: "
                                 + emp.getName() + ", Designation: " + emp.getDesignation());
                     }
+                    DiffUtil.DiffResult result = DiffUtil.calculateDiff(new EmployeeDiffCallback(employeeList, employees));
                     employeeList.clear();
                     employeeList.addAll(employees);
                     employeeAdapter.notifyDataSetChanged();
+//                    result.dispatchUpdatesTo(employeeAdapter);
                 } else {
                     Log.e(TAG, "API Response Error: " + response.code());
                 }
