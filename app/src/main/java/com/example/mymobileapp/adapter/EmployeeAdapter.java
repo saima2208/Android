@@ -57,13 +57,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         holder.emailText.setText(employee.getEmail());
         holder.designationText.setText(employee.getDesignation());
 
-//        holder.updateButton.setOnClickListener(v -> {
-//            Log.d("Update", "Update clicked for " + employee.getName());
-//
-//            Intent intent = new Intent(context, AddEmployeeActivity.class);
-//            intent.putExtra("employee", new Gson().toJson(employee));
-//            context.startActivity(intent);
-//        });
 
         holder.updateButton.setOnClickListener(v -> {
             Log.d("Update", "Update clicked for " + employee.getName());

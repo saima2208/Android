@@ -67,7 +67,7 @@ public class EmployeeListActivity extends AppCompatActivity {
 
     private void fetchEmployees() {
         Retrofit retrofit = new Retrofit.Builder()
-               .baseUrl("http://192.168.100.2:8081/")
+                .baseUrl("http://192.168.0.3:8081/")
 
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
