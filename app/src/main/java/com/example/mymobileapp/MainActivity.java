@@ -1,5 +1,7 @@
 package com.example.mymobileapp;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -25,22 +27,22 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Button btnAdd = findViewById(R.id.btnAdd);
+        Button btnList = findViewById(R.id.btnList);
 
-        Button btnAddEmployee = findViewById(R.id.btnAddEmployee);
-        Button btnListEmployee = findViewById(R.id.btnListEmployee);
-
-        btnAddEmployee.setOnClickListener(v -> navigateToAddEmployeePage());
-        btnListEmployee.setOnClickListener(v -> navigateToEmployeeListPage());
+        btnAdd.setOnClickListener(v -> navigateToAddBookPage());
+        btnList.setOnClickListener(v -> navigateToBookListPage());
     }
 
-    private void navigateToAddEmployeePage() {
+    private void navigateToAddBookPage() {
         Intent intent = new Intent(MainActivity.this, AddBookActivity.class);
         startActivity(intent);
     }
 
-    private void navigateToEmployeeListPage() {
+    private void navigateToBookListPage() {
         Intent intent = new Intent(MainActivity.this, BookListActivity.class);
         startActivity(intent);
     }
+
 
 }
