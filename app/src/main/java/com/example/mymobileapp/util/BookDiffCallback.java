@@ -1,19 +1,19 @@
 package com.example.mymobileapp.util;
 
+
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.example.mymobileapp.model.Employee;
+import com.example.mymobileapp.model.Book;
 
 import java.util.List;
 import java.util.Objects;
 
-public class EmployeeDiffCallback extends DiffUtil.Callback {
+public class BookDiffCallback extends DiffUtil.Callback {
 
-    private final List<Employee> oldList;
+    private final List<Book> oldList;
+    private final List<Book> newList;
 
-    private final List<Employee> newList;
-
-    public EmployeeDiffCallback(List<Employee> oldList, List<Employee> newList) {
+    public BookDiffCallback(List<Book> oldList, List<Book> newList) {
         this.oldList = oldList;
         this.newList = newList;
     }
@@ -38,3 +38,4 @@ public class EmployeeDiffCallback extends DiffUtil.Callback {
         return oldList.get(oldItemPosition).equals(newList.get(newItemPosition));
     }
 }
+

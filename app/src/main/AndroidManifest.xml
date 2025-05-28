@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.BookListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddBookActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.EmployeeListActivity"
             android:exported="false" />
         <activity

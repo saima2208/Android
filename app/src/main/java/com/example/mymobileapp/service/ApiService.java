@@ -1,6 +1,6 @@
 package com.example.mymobileapp.service;
 
-import com.example.mymobileapp.model.Employee;
+import com.example.mymobileapp.model.Book;
 
 import java.util.List;
 
@@ -13,16 +13,18 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiService {
-    @POST("employee")
-    Call<Employee> saveEmployee(@Body Employee employee);
 
-    @GET("employee")
-    Call<List<Employee>> getAllEmployee();
+    @POST("book")
+    Call<Book> saveBook(@Body Book book);
+
+    @GET("book")
+    Call<List<Book>> getAllBook();
 
 
-    @PUT("employee/{id}")
-    Call<Employee> updateEmployee(@Path("id") int id, @Body Employee employee);
+    @PUT("book/{id}")
+    Call<Book> updateBook(@Path("id") int id, @Body Book book);
 
-    @DELETE("employee/{id}")
-    Call<Void> deleteEmployee(@Path("id") int id);
+    @DELETE("book/{id}")
+    Call<Void> deleteBook(@Path("id") int id);
+
 }

@@ -1,6 +1,7 @@
 package com.example.mymobileapp.activity;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,11 +15,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.mymobileapp.R;
-import com.example.mymobileapp.adapter.EmployeeAdapter;
-import com.example.mymobileapp.model.Employee;
+import com.example.mymobileapp.adapter.BookAdapter;
+import com.example.mymobileapp.model.Book;
 import com.example.mymobileapp.service.ApiService;
-import com.example.mymobileapp.util.EmployeeDiffCallback;
+import com.example.mymobileapp.util.BookDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,18 +31,17 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class EmployeeListActivity extends AppCompatActivity {
-
-    private static final String TAG = "EmployeeListActivity";
+public class BookListActivity extends AppCompatActivity {
+    private static final String TAG = "BookListActivity";
     private RecyclerView recyclerView;
-    private EmployeeAdapter employeeAdapter;
-    private List<Employee> employeeList = new ArrayList<>();
+    private BookAdapter bookAdapter;
+    private List<Book> bookList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_employee_list);
+        setContentView(R.layout.activity_book_list);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -50,13 +51,12 @@ public class EmployeeListActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        employeeAdapter = new EmployeeAdapter(this,employeeList);
-        recyclerView = findViewById(R.id.employeeRecyclerView);
+        bookAdapter = new BookAdapter(this,bookList);
+        recyclerView = findViewById(R.id.bookRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(employeeAdapter);
+        recyclerView.setAdapter(bookAdapter);
 
-        fetchEmployees();
+        fetchBooks();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class EmployeeListActivity extends AppCompatActivity {
         return true;
     }
 
-    private void fetchEmployees() {
+    private void fetchBooks() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.3:8081/")
 
@@ -73,22 +73,22 @@ public class EmployeeListActivity extends AppCompatActivity {
                 .build();
 
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Employee>> call = apiService.getAllEmployee();
+        Call<List<Book>> call = apiService.getAllBook();
 
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(@NonNull Call<List<Employee>> call, @NonNull Response<List<Employee>> response) {
+            public void onResponse(@NonNull Call<List<Book>> call, @NonNull Response<List<Book>> response) {
                 if (response.isSuccessful()) {
-                    List<Employee> employees = response.body();
-                    assert employees != null;
-                    for (Employee emp : employees) {
-                        Log.d(TAG, "ID: " + emp.getId() + ", Name: "
-                                + emp.getName() + ", Designation: " + emp.getDesignation());
+                    List<Book> books = response.body();
+                    assert books != null;
+                    for (Book book1 : books) {
+                        Log.d(TAG, "ID: " + book1.getId() + ", Name: "
+                                + book1.getName() + ", Author_Name: " + book1.getAuthor_name() + ", Price: " + book1.getPrice());
                     }
-                    DiffUtil.DiffResult result = DiffUtil.calculateDiff(new EmployeeDiffCallback(employeeList, employees));
-                    employeeList.clear();
-                    employeeList.addAll(employees);
-                    employeeAdapter.notifyDataSetChanged();
+                    DiffUtil.DiffResult result = DiffUtil.calculateDiff(new BookDiffCallback(bookList, books));
+                    bookList.clear();
+                    bookList.addAll(books);
+                    bookAdapter.notifyDataSetChanged();
 //                    result.dispatchUpdatesTo(employeeAdapter);
                 } else {
                     Log.e(TAG, "API Response Error: " + response.code());
@@ -96,7 +96,7 @@ public class EmployeeListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Employee>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
                 Log.e(TAG, "API Call Failed: " + t.getMessage());
             }
         });
