@@ -54,6 +54,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookAdapter.BookViewHolder holder, int position) {
         Book book = bookList.get(position);
+        holder.idText.setText(String.valueOf(book.getId()));
         holder.nameText.setText(book.getName());
         holder.authorText.setText(book.getAuthor_name());
         String priceText = String.valueOf(book.getPrice()); // If price is numeric
@@ -111,16 +112,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
-        TextView nameText, authorText, priceText;
+        TextView idText,nameText, authorText, priceText;
         Button updateButton, deleteButton;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            idText = itemView.findViewById(R.id.idText);
             nameText = itemView.findViewById(R.id.nameText);
-            authorText = itemView.findViewById(R.id.AuthorText);
+            authorText = itemView.findViewById(R.id.authorText);
             priceText = itemView.findViewById(R.id.priceText);
-            updateButton = itemView.findViewById(R.id.update);
+            updateButton = itemView.findViewById(R.id.edit);
             deleteButton = itemView.findViewById(R.id.delete);
         }
     }

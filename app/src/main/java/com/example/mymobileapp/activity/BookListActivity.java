@@ -67,7 +67,7 @@ public class BookListActivity extends AppCompatActivity {
 
     private void fetchBooks() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.3:8081/")
+                .baseUrl("http://192.168.0.7:8081/")
 
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

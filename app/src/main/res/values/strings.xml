@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EmployeeCrudWithApi</string>
+    <string name="app_name">BookApp</string>
 
     <!--Employee-->
     <string name="name">Name</string>
@@ -18,4 +18,5 @@
     <string name="add_employee">Add Employee</string>
     <string name="price">price</string>
     <string name="authorName">authorName</string>
+    <string name="id">id</string>
 </resources>

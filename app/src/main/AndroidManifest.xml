@@ -22,12 +22,7 @@
         <activity
             android:name=".activity.AddBookActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.EmployeeListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.AddEmployeeActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
