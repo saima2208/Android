@@ -164,8 +164,8 @@
 
     <Button
         android:id="@+id/edit"
-        android:layout_width="95dp"
-        android:layout_height="42dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="156dp"
         android:layout_marginTop="56dp"
         android:clickable="true"
@@ -178,13 +178,13 @@
         app:endIconTint="@color/white"
         app:icon="@drawable/baseline_edit_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/authorText"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="95dp"
-        android:layout_height="44dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="140dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
@@ -198,6 +198,7 @@
         app:endIconTint="@color/black"
         app:icon="@drawable/baseline_auto_delete_24"
         app:layout_constraintStart_toEndOf="@+id/priceText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit" />
 
 
