@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookApp</string>
+    <string name="app_name">Broadcast Service</string>
     <string name="stop_service">STOP SERVICE</string>
     <string name="start_service">START SERVICE</string>
     <string name="send_custom_broadcast">SEND_CUSTOM_BROADCAST</string>
