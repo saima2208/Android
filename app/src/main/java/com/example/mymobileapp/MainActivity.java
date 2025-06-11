@@ -9,9 +9,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.mymobileapp.activity.SearchableGridViewActivity;
-import com.example.mymobileapp.activity.SearchableListViewActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
